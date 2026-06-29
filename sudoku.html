@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>数独游戏 - 猫咪主题</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .sudoku-start {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background: linear-gradient(160deg, #fdf2f8 0%, #fce7f3 30%, #fde68a 100%);
+    }
+    .sudoku-start h1 {
+      font-size: 48px;
+      color: #f472b6;
+      margin-bottom: 12px;
+      font-weight: 800;
+    }
+    .sudoku-start p {
+      color: #c084b0;
+      font-size: 16px;
+      margin-bottom: 32px;
+    }
+    .rules-card {
+      background: rgba(255,255,255,0.7);
+      border: 2px solid rgba(249, 168, 212, 0.3);
+      border-radius: 16px;
+      padding: 28px 32px;
+      max-width: 480px;
+      margin-bottom: 36px;
+      box-shadow: 0 8px 32px rgba(244, 114, 182, 0.12);
+    }
+    .rules-card h3 {
+      color: #f472b6;
+      font-size: 16px;
+      margin-bottom: 16px;
+      font-weight: 700;
+    }
+    .rules-card ul {
+      list-style: none;
+      padding: 0;
+    }
+    .rules-card li {
+      color: #a87aa8;
+      font-size: 14px;
+      line-height: 2;
+      padding-left: 4px;
+    }
+    .rules-card li::before {
+      content: '🐾';
+      margin-right: 8px;
+      font-size: 12px;
+    }
+    .difficulty-label {
+      color: #c084b0;
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+    .difficulty-btns {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .difficulty-btns button {
+      padding: 14px 28px;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 14px;
+      border: 2px solid rgba(249, 168, 212, 0.3);
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s, box-shadow 0.15s;
+      box-shadow: 0 2px 8px rgba(244, 114, 182, 0.1);
+    }
+    .diff-beginner {
+      background: rgba(167, 139, 250, 0.1);
+      color: #8b5cf6;
+    }
+    .diff-beginner:hover {
+      background: rgba(167, 139, 250, 0.2);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(139, 92, 246, 0.2);
+    }
+    .diff-easy {
+      background: rgba(52, 211, 153, 0.1);
+      color: #34d399;
+    }
+    .diff-easy:hover {
+      background: rgba(52, 211, 153, 0.2);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(52, 211, 153, 0.2);
+    }
+    .diff-hard {
+      background: rgba(251, 146, 60, 0.1);
+      color: #fb923c;
+    }
+    .diff-hard:hover {
+      background: rgba(251, 146, 60, 0.2);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(251, 146, 60, 0.2);
+    }
+    .back-link {
+      position: absolute;
+      top: 24px;
+      left: 32px;
+      color: #c084b0;
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.2s;
+    }
+    .back-link:hover {
+      color: #f472b6;
+    }
+    .cat-deco {
+      position: fixed;
+      font-size: 48px;
+      opacity: 0.12;
+      pointer-events: none;
+    }
+    .cat-deco.tl { top: 20px; left: 24px; }
+    .cat-deco.tr { top: 20px; right: 24px; }
+    .cat-deco.bl { bottom: 20px; left: 24px; }
+    .cat-deco.br { bottom: 20px; right: 24px; }
+  </style>
+</head>
+<body>
+  <div class="cat-deco tl">🐱</div>
+  <div class="cat-deco tr">🐾</div>
+  <div class="cat-deco bl">🐾</div>
+  <div class="cat-deco br">🐱</div>
+  <div class="sudoku-start">
+    <a href="index.html" class="back-link">← 返回</a>
+    <h1>🐱 猫咪数独</h1>
+    <p>和猫咪一起玩的经典数字推理游戏</p>
+
+    <div class="rules-card">
+      <h3>🐾 游戏规则</h3>
+      <ul>
+        <li>在 9×9 的格子中填入数字 1～9</li>
+        <li>每一行必须包含 1～9，不能重复</li>
+        <li>每一列必须包含 1～9，不能重复</li>
+        <li>每个 3×3 宫格必须包含 1～9，不能重复</li>
+        <li>点击格子后使用下方数字键盘或键盘 1～9 输入</li>
+      </ul>
+    </div>
+
+    <div class="difficulty-label">选择难度</div>
+    <div class="difficulty-btns">
+      <button class="diff-beginner" onclick="startGame('beginner')">🐱 新手</button>
+      <button class="diff-easy" onclick="startGame('easy')">🐈 简单</button>
+      <button class="diff-hard" onclick="startGame('hard')">😼 困难</button>
+    </div>
+  </div>
+  <script>
+    function startGame(difficulty) {
+      sessionStorage.setItem('sudokuDifficulty', difficulty);
+      location.href = 'sudoku-game.html';
+    }
+  </script>
+</body>
+</html>
